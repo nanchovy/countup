@@ -16,6 +16,7 @@
     </v-app-bar>
 
     <v-content>
+      <v-layout>
       <dart-board
         @clicked="clicked"
       />
@@ -23,7 +24,7 @@
         :history="history"
         @deleteLastHistory="deleteLastHistory"
       />
-
+      </v-layout>
     </v-content>
   </v-app>
 </template>
@@ -40,7 +41,7 @@ export default {
   },
   data: () => ({
     history: [],
-    gameOngoing: false
+    gameOngoing: true
   }),
   methods: {
     clicked (number, times) {
