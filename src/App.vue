@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>おうちでダーツ</span>
+        <span class="font-weight-light">COUNT UP</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        text
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+      >
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-app-bar>
+
+    <v-content>
+      <dart-board
+        @clicked="clicked"
+      />
+      <score-board
+        :history="history"
+        @deleteLastHistory="deleteLastHistory"
+      />
+
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import DartBoard from './components/DartBoard.vue'
+  import ScoreBoard from './components/ScoreBoard.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld
+    DartBoard,
+    ScoreBoard
+  },
+  data: () => ({
+    history: [],
+    gameOngoing: false
+  }),
+  methods: {
+    clicked (number, times) {
+      this.history.push({ score: number*times })
+      this.history[this.history.length-1]["order"] = this.history.length
+    },
+    deleteLastHistory () {
+      this.history.pop()
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
