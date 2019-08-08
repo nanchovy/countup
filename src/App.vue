@@ -23,6 +23,7 @@
       <score-board
         :history="history"
         @deleteLastHistory="deleteLastHistory"
+        @resetHistory="resetHistory"
       />
       </v-layout>
     </v-content>
@@ -50,6 +51,9 @@ export default {
     },
     deleteLastHistory () {
       this.history.pop()
+    },
+    resetHistory () {
+      this.history = []
     }
   }
 };

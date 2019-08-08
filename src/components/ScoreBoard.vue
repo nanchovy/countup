@@ -7,6 +7,7 @@
                     {{ history.reduce((sum, dart) => sum + dart.score, 0) }}
                 </div>
         <v-btn color="warning" @click="this.deleteLastHistory">undo</v-btn>
+                <v-btn color="error" @click="resetHistory">RESET</v-btn>
             </v-layout>
             <v-layout>
         <v-simple-table dense>
@@ -42,6 +43,9 @@
         methods: {
             deleteLastHistory () {
                 this.$emit('deleteLastHistory')
+            },
+            resetHistory () {
+                this.$emit('resetHistory')
             }
         }
     }
