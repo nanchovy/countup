@@ -1,9 +1,15 @@
 <template>
     <div>
         <!--{{ history }}-->
-        {{ history.reduce((sum, dart) => sum + dart.score, 0) }}
+        <v-container>
+            <v-layout>
+                <div class="score_display">
+                    {{ history.reduce((sum, dart) => sum + dart.score, 0) }}
+                </div>
         <v-btn color="warning" @click="this.deleteLastHistory">undo</v-btn>
-        <v-simple-table>
+            </v-layout>
+            <v-layout>
+        <v-simple-table dense>
             <thead>
             <tr>
                 <th class="text-left">投目</th>
@@ -17,6 +23,8 @@
             </tr>
             </tbody>
         </v-simple-table>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
@@ -38,4 +46,10 @@
         }
     }
 </script>
+
+<style>
+    .score_display {
+        font-size: 10rem;
+    }
+</style>
 
