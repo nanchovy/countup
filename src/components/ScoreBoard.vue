@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!--{{ history }}-->
         <v-container>
             <v-layout>
                 <div class="score_display">
@@ -18,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="dart in history">
+            <tr v-for="dart in history" v-bind:key="dart.order">
                 <td>{{ dart.order }}</td>
                 <td>{{ dart.score }}</td>
             </tr>

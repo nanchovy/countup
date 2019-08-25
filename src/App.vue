@@ -5,7 +5,6 @@
         <span>おうちでダーツ</span>
         <span class="font-weight-light">COUNT UP</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
       <v-btn
         text
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
