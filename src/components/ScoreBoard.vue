@@ -2,10 +2,37 @@
   <div>
     <v-container>
       <v-layout>
-        <div class="score_display">{{ history.reduce((sum, dart) => sum + dart.score, 0) }}</div>
+        <div class="score_display">
+          {{ history.reduce((sum, dart) => sum + dart.score, 0) }}
+        </div>
         <v-btn color="warning" @click="this.deleteLastHistory">undo</v-btn>
-        <v-btn color="error" @click="resetHistory">RESET</v-btn>
-      </v-layout>
+        <v-dialog
+            v-model="dialog"
+            width="500"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn color="error" v-on="on">RESET</v-btn>
+          </template>
+          <v-card>
+            <v-card-text>
+              リセットしますか？
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+              <v-btn
+                color="primary"
+                text
+                @click="dialog = false"
+              >キャンセル</v-btn>
+              <v-btn
+                color="primary"
+                text
+                @click="resetHistory()"
+              ><b>リセット</b></v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       <v-layout>
         <div v-show="over" class="over">OVER</div>
       </v-layout>
@@ -42,17 +69,20 @@ export default {
     over: {
       type: Boolean,
       required: true
-    }
   },
   methods: {
-    deleteLastHistory() {
-      this.$emit("deleteLastHistory");
+    deleteLastHistory () {
+      this.$emit('deleteLastHistory')
     },
-    resetHistory() {
-      this.$emit("resetHistory");
+    resetHistory () {
+      this.$emit('resetHistory')
+      this.hiddenDialog()
+    },
+    hiddenDialog() {
+      this.dialog = false
     }
   }
-};
+}
 </script>
 
 <style>
