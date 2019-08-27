@@ -14,25 +14,27 @@
             <v-btn color="error" v-on="on">RESET</v-btn>
           </template>
           <v-card>
-          <v-card-text>
-            リセットしますか？
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <div class="flex-grow-1"></div>
-            <v-btn
-              color="primary"
-              text
-              @click="dialog = false"
-            >キャンセル</v-btn>
-            <v-btn
-              color="primary"
-              text
-              @click="resetHistory()"
-            ><b>リセット</b></v-btn>
-          </v-card-actions>
-        </v-card>
+            <v-card-text>
+              リセットしますか？
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+              <v-btn
+                color="primary"
+                text
+                @click="dialog = false"
+              >キャンセル</v-btn>
+              <v-btn
+                color="primary"
+                text
+                @click="resetHistory()"
+              ><b>リセット</b></v-btn>
+            </v-card-actions>
+          </v-card>
         </v-dialog>
+      <v-layout>
+        <div v-show="over" class="over">OVER</div>
       </v-layout>
       <v-layout>
         <v-simple-table dense>
@@ -55,35 +57,41 @@
 </template>
 
 <script>
-    export default {
-        data: () => ({
-            totalScore: 0,
-            dialog: false
-        }),
-        props: {
-            history: {
-                type: Array,
-                required: true
-            }
-        },
-        methods: {
-            deleteLastHistory () {
-                this.$emit('deleteLastHistory')
-            },
-            resetHistory () {
-                this.$emit('resetHistory')
-                this.hiddenDialog()
-            },
-            hiddenDialog() {
-                this.dialog = false
-            }
-        }
+export default {
+  data: () => ({
+    totalScore: 0
+  }),
+  props: {
+    history: {
+      type: Array,
+      required: true
+    },
+    over: {
+      type: Boolean,
+      required: true
+  },
+  methods: {
+    deleteLastHistory () {
+      this.$emit('deleteLastHistory')
+    },
+    resetHistory () {
+      this.$emit('resetHistory')
+      this.hiddenDialog()
+    },
+    hiddenDialog() {
+      this.dialog = false
     }
+  }
+}
 </script>
 
 <style>
-    .score_display {
-        font-size: 10rem;
-    }
+.score_display {
+  font-size: 10rem;
+  /* font-weight: bold; */
+}
+.over {
+  font-size: 3rem;
+}
 </style>
 
