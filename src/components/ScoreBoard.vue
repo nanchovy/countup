@@ -36,6 +36,7 @@
       </v-layout>
       <v-layout>
         <div v-show="over" class="over">OVER</div>
+        <div v-show="!over" class="nOfThrow">{{ this.history.length + 1 }}投目</div>
       </v-layout>
       <v-layout>
         <v-simple-table dense>
@@ -93,7 +94,11 @@ export default {
   font-size: 10rem;
   /* font-weight: bold; */
 }
+.nOfThrow {
+  font-size: 3rem;
+}
 .over {
+  color: red;
   font-size: 3rem;
 }
 </style>
