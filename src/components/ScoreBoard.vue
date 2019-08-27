@@ -7,6 +7,9 @@
         <v-btn color="error" @click="resetHistory">RESET</v-btn>
       </v-layout>
       <v-layout>
+        <div v-show="over" class="over">OVER</div>
+      </v-layout>
+      <v-layout>
         <v-simple-table dense>
           <thead>
             <tr>
@@ -35,6 +38,10 @@ export default {
     history: {
       type: Array,
       required: true
+    },
+    over: {
+      type: Boolean,
+      required: true
     }
   },
   methods: {
@@ -51,6 +58,10 @@ export default {
 <style>
 .score_display {
   font-size: 10rem;
+  /* font-weight: bold; */
+}
+.over {
+  font-size: 3rem;
 }
 </style>
 

@@ -21,6 +21,7 @@
       />
       <score-board
         :history="history"
+        :over="over"
         @deleteLastHistory="deleteLastHistory"
         @resetHistory="resetHistory"
       />
@@ -41,18 +42,33 @@ export default {
   },
   data: () => ({
     history: [],
-    gameOngoing: true
+    gameOngoing: true,
+    over: false
   }),
   methods: {
     clicked (number, times) {
+      if (this.history.length >= 24) return
       this.history.push({ score: number*times })
       this.history[this.history.length-1]["order"] = this.history.length
+      this.isOver()
     },
     deleteLastHistory () {
       this.history.pop()
+      this.isOver()
     },
     resetHistory () {
       this.history = []
+      this.over = false
+    },
+    isOver() {
+      if (this.history.length >= 24) {
+        alert("over!")
+        this.over = true
+        return true
+      } else {
+        this.over = false
+        return false
+      }
     }
   }
 };
