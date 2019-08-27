@@ -33,6 +33,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+      </v-layout>
       <v-layout>
         <div v-show="over" class="over">OVER</div>
       </v-layout>
@@ -59,7 +60,8 @@
 <script>
 export default {
   data: () => ({
-    totalScore: 0
+    totalScore: 0,
+    dialog: false
   }),
   props: {
     history: {
@@ -69,6 +71,7 @@ export default {
     over: {
       type: Boolean,
       required: true
+    }
   },
   methods: {
     deleteLastHistory () {
