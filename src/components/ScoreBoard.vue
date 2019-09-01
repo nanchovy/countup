@@ -3,7 +3,7 @@
     <v-container>
       <v-layout>
         <div class="score_display">
-          {{ history.reduce((sum, dart) => sum + dart.score, 0) }}
+          {{ this.totalScore }}
         </div>
         <v-btn color="warning" @click="this.deleteLastHistory">undo</v-btn>
         <v-dialog
@@ -35,7 +35,7 @@
         </v-dialog>
       </v-layout>
       <v-layout>
-        <div v-show="over" class="over">OVER</div>
+        <div v-show="over" class="over">OVER <a target="_blank" :href="tweetURL"><font-awesome-icon :icon="['fab', 'twitter-square']"/></a></div>
         <div v-show="!over" class="nOfThrow">{{ this.history.length + 1 }}投目</div>
       </v-layout>
       <v-layout>
@@ -62,6 +62,7 @@
 export default {
   data: () => ({
     totalScore: 0,
+    tweetURL: '',
     dialog: false
   }),
   props: {
@@ -82,8 +83,26 @@ export default {
       this.$emit('resetHistory')
       this.hiddenDialog()
     },
-    hiddenDialog() {
+    hiddenDialog () {
       this.dialog = false
+    },
+    assembleTweetURL () {
+      return (
+        'https://twitter.com/intent/tweet?text=' +
+        '%08%23%e3%81%8a%e3%81%86%e3%81%a1%e3%81%a7%e3%83%80%e3%83%bc%e3%83%84%0d%0a%e3%82%b2%e3%83%bc%e3%83%a0%3a%20%e3%82%ab%e3%82%a6%e3%83%b3%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%0d%0a%e5%be%97%e7%82%b9%3a%20' + 
+        this.history.reduce((sum, dart) => sum + dart.score, 0) +
+        '%e7%82%b9%0d%0a' + 
+        '&url=http://bit.ly/CountUpDarts'
+      )
+    }
+  },
+  watch: {
+    over: function (newVal, oldVal) {
+      this.tweetURL = this.assembleTweetURL()
+      console.log("watch")
+    },
+    history: function (newVal, oldVal) {
+      this.totalScore = this.history.reduce((sum, dart) => sum + dart.score, 0)
     }
   }
 }
