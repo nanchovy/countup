@@ -5,13 +5,27 @@
         <span>おうちでダーツ</span>
         <span class="font-weight-light">COUNT UP</span>
       </v-toolbar-title>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+      <div class="flex-grow-1"></div>
+      <v-dialog
+        v-model="dialog"
+        width="500"
       >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">ルール説明</v-btn>
+        </template>
+        <v-card>
+          <v-card-title
+            class="headline grey lighten-2"
+            primary-title
+          >
+            ルール説明
+          </v-card-title>
+          <v-card-text>
+            1ラウンド3投で8ラウンド、計24投のスコアで競います。
+            刺さった場所をクリックするとスコアに加算されます。
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
 
     <v-content>
@@ -43,7 +57,8 @@ export default {
   data: () => ({
     history: [],
     gameOngoing: true,
-    over: false
+    over: false,
+    dialog: false
   }),
   methods: {
     clicked (number, times) {
