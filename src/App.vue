@@ -7,11 +7,11 @@
       </v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-dialog
-        v-model="dialog"
+        v-model="dialogRule"
         width="500"
       >
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on">ルール説明</v-btn>
+          <v-btn text v-on="on">ルール説明</v-btn>
         </template>
         <v-card>
           <v-card-title
@@ -26,12 +26,37 @@
           </v-card-text>
         </v-card>
       </v-dialog>
+      <v-dialog
+        v-model="dialogConfig"
+        width="500"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">設定</v-btn>
+        </template>
+        <v-card>
+          <v-card-title
+            class="headline grey lighten-2"
+            primary-title
+          >
+            設定
+          </v-card-title>
+          <v-card-text>
+
+            <v-radio-group v-model="bullConfig" :mandatory="false">
+              <v-radio :disabled=!!(history.length) label="セパレートブル(アウター25点、インナー50点)" value="separate"></v-radio>
+              <v-radio :disabled=!!(history.length) label="ファットブル(アウター50点、インナー50点)" value="fat"></v-radio>
+            </v-radio-group>
+            <p v-show="gameOngoing">ゲーム開始後は変更できません</p>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
 
     <v-content>
       <v-layout>
       <dart-board
         @clicked="clicked"
+        :bullConfig="bullConfig"
       />
       <score-board
         :history="history"
@@ -56,9 +81,12 @@ export default {
   },
   data: () => ({
     history: [],
-    gameOngoing: true,
+    gameOngoing: false,
     over: false,
-    dialog: false
+    // あとでdialogRuleに帰る
+    dialogRule: false,
+    dialogConfig: false,
+    bullConfig: "separate"
   }),
   methods: {
     clicked (number, times) {
@@ -75,7 +103,7 @@ export default {
       this.history = []
       this.over = false
     },
-    isOver() {
+    isOver () {
       if (this.history.length >= 24) {
         alert("over!")
         this.over = true
@@ -84,6 +112,18 @@ export default {
         this.over = false
         return false
       }
+    },
+    isGameOngoing () {
+      if (this.history.length > 0 && this.history.length < 24) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  watch: {
+    history: function (newVal, oldVal) {
+      this.gameOngoing = this.isGameOngoing()
     }
   }
 };
