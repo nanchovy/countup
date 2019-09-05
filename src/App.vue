@@ -41,10 +41,12 @@
             設定
           </v-card-title>
           <v-card-text>
+
             <v-radio-group v-model="bullConfig" :mandatory="false">
-              <v-radio label="セパレートブル(アウター25点、インナー50点)" value="separate"></v-radio>
-              <v-radio label="ファットブル(アウター50点、インナー50点)" value="fat"></v-radio>
+              <v-radio :disabled=!!(history.length) label="セパレートブル(アウター25点、インナー50点)" value="separate"></v-radio>
+              <v-radio :disabled=!!(history.length) label="ファットブル(アウター50点、インナー50点)" value="fat"></v-radio>
             </v-radio-group>
+            <p v-show="gameOngoing">ゲーム開始後は変更できません</p>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -79,7 +81,7 @@ export default {
   },
   data: () => ({
     history: [],
-    gameOngoing: true,
+    gameOngoing: false,
     over: false,
     // あとでdialogRuleに帰る
     dialogRule: false,
@@ -101,7 +103,7 @@ export default {
       this.history = []
       this.over = false
     },
-    isOver() {
+    isOver () {
       if (this.history.length >= 24) {
         alert("over!")
         this.over = true
@@ -110,6 +112,18 @@ export default {
         this.over = false
         return false
       }
+    },
+    isGameOngoing () {
+      if (this.history.length > 0 && this.history.length < 24) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  watch: {
+    history: function (newVal, oldVal) {
+      this.gameOngoing = this.isGameOngoing()
     }
   }
 };
