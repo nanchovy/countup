@@ -7,11 +7,11 @@
       </v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-dialog
-        v-model="dialog"
+        v-model="dialogRule"
         width="500"
       >
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on">ルール説明</v-btn>
+          <v-btn text v-on="on">ルール説明</v-btn>
         </template>
         <v-card>
           <v-card-title
@@ -26,12 +26,35 @@
           </v-card-text>
         </v-card>
       </v-dialog>
+      <v-dialog
+        v-model="dialogConfig"
+        width="500"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">設定</v-btn>
+        </template>
+        <v-card>
+          <v-card-title
+            class="headline grey lighten-2"
+            primary-title
+          >
+            設定
+          </v-card-title>
+          <v-card-text>
+            <v-radio-group v-model="bullConfig" :mandatory="false">
+              <v-radio label="セパレートブル(アウター25点、インナー50点)" value="separate"></v-radio>
+              <v-radio label="ファットブル(アウター50点、インナー50点)" value="fat"></v-radio>
+            </v-radio-group>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
 
     <v-content>
       <v-layout>
       <dart-board
         @clicked="clicked"
+        :bullConfig="bullConfig"
       />
       <score-board
         :history="history"
@@ -58,7 +81,10 @@ export default {
     history: [],
     gameOngoing: true,
     over: false,
-    dialog: false
+    // あとでdialogRuleに帰る
+    dialogRule: false,
+    dialogConfig: false,
+    bullConfig: "separate"
   }),
   methods: {
     clicked (number, times) {
