@@ -71,6 +71,16 @@
           </v-col>
         </v-row>
       </v-layout>
+      <div class="footer">
+      <v-footer>
+        <v-col
+          class="text-center"
+          cols="12"
+        >
+          {{ new Date().getFullYear() }} — <a href="https://twitter.com/nek180"><strong>Nekoyashiki</strong></a>
+        </v-col>
+      </v-footer>
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -78,12 +88,14 @@
 <script>
   import DartBoard from './components/DartBoard.vue'
   import ScoreBoard from './components/ScoreBoard.vue'
+  import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     DartBoard,
-    ScoreBoard
+    ScoreBoard,
+    Footer,
   },
   data: () => ({
     history: [],
@@ -134,3 +146,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.footer {
+  color: black;
+}
+</style>
