@@ -30,19 +30,21 @@
 
     <v-content>
       <v-layout>
-        <v-flex xs12 sm6>
-          <dart-board
-            @clicked="clicked"
-          />
-        </v-flex>
-        <v-flex xs12 sm6>
-          <score-board
-            :history="history"
-            :over="over"
-            @deleteLastHistory="deleteLastHistory"
-            @resetHistory="resetHistory"
-          />
-        </v-flex>
+        <v-row>
+          <v-col cols="12" md="6">
+            <dart-board
+              @clicked="clicked"
+            />
+          </v-col>
+          <v-col cols="12" md="6">
+            <score-board
+              :history="history"
+              :over="over"
+              @deleteLastHistory="deleteLastHistory"
+              @resetHistory="resetHistory"
+            />
+          </v-col>
+        </v-row>
       </v-layout>
     </v-content>
   </v-app>
