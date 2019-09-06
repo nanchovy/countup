@@ -54,16 +54,21 @@
 
     <v-content>
       <v-layout>
-      <dart-board
-        @clicked="clicked"
-        :bullConfig="bullConfig"
-      />
-      <score-board
-        :history="history"
-        :over="over"
-        @deleteLastHistory="deleteLastHistory"
-        @resetHistory="resetHistory"
-      />
+        <v-row>
+          <v-col cols="12" md="6">
+            <dart-board
+              @clicked="clicked"
+            />
+          </v-col>
+          <v-col cols="12" md="6">
+            <score-board
+              :history="history"
+              :over="over"
+              @deleteLastHistory="deleteLastHistory"
+              @resetHistory="resetHistory"
+            />
+          </v-col>
+        </v-row>
       </v-layout>
     </v-content>
   </v-app>
