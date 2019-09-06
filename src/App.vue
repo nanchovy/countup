@@ -58,6 +58,7 @@
           <v-col cols="12" md="6">
             <dart-board
               @clicked="clicked"
+              :bullConfig="bullConfig"
             />
           </v-col>
           <v-col cols="12" md="6">
