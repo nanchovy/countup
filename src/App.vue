@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>おうちでダーツ</span>
+        <span>ienage.com</span>
         <span class="font-weight-light">COUNT UP</span>
       </v-toolbar-title>
       <div class="flex-grow-1"></div>
