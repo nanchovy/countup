@@ -30,15 +30,19 @@
 
     <v-content>
       <v-layout>
-      <dart-board
-        @clicked="clicked"
-      />
-      <score-board
-        :history="history"
-        :over="over"
-        @deleteLastHistory="deleteLastHistory"
-        @resetHistory="resetHistory"
-      />
+        <v-flex xs12 sm6>
+          <dart-board
+            @clicked="clicked"
+          />
+        </v-flex>
+        <v-flex xs12 sm6>
+          <score-board
+            :history="history"
+            :over="over"
+            @deleteLastHistory="deleteLastHistory"
+            @resetHistory="resetHistory"
+          />
+        </v-flex>
       </v-layout>
     </v-content>
   </v-app>
