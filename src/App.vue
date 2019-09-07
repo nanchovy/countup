@@ -71,6 +71,9 @@
           </v-col>
         </v-row>
       </v-layout>
+      <div class="footer">
+        <ienage-footer></ienage-footer>
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -78,18 +81,19 @@
 <script>
   import DartBoard from './components/DartBoard.vue'
   import ScoreBoard from './components/ScoreBoard.vue'
+  import IenageFooter from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     DartBoard,
-    ScoreBoard
+    ScoreBoard,
+    IenageFooter,
   },
   data: () => ({
     history: [],
     gameOngoing: false,
     over: false,
-    // あとでdialogRuleに帰る
     dialogRule: false,
     dialogConfig: false,
     bullConfig: "separate"
@@ -134,3 +138,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.footer {
+  color: black;
+}
+</style>
