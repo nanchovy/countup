@@ -72,14 +72,7 @@
         </v-row>
       </v-layout>
       <div class="footer">
-      <v-footer>
-        <v-col
-          class="text-center"
-          cols="12"
-        >
-          {{ new Date().getFullYear() }} — <a href="https://twitter.com/nek180"><strong>Nekoyashiki</strong></a>
-        </v-col>
-      </v-footer>
+        <ienage-footer></ienage-footer>
       </div>
     </v-content>
   </v-app>
@@ -88,20 +81,19 @@
 <script>
   import DartBoard from './components/DartBoard.vue'
   import ScoreBoard from './components/ScoreBoard.vue'
-  import Footer from './components/Footer.vue'
+  import IenageFooter from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     DartBoard,
     ScoreBoard,
-    Footer,
+    IenageFooter,
   },
   data: () => ({
     history: [],
     gameOngoing: false,
     over: false,
-    // あとでdialogRuleに帰る
     dialogRule: false,
     dialogConfig: false,
     bullConfig: "separate"
