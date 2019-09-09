@@ -35,6 +35,7 @@
             <dart-board
               @clicked="clicked"
               :bullConfig="bullConfig"
+              :validAreaHitHistory="validAreaHitHistory"
             />
           </v-col>
           <v-col cols="12" md="6">
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-import DartBoard from '@/components/DartBoard.vue'
+import DartBoard from '@/components/DartBoardForShootOut.vue'
 import ScoreBoard from '@/components/ScoreBoard.vue'
 
 export default {
