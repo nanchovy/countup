@@ -84,7 +84,7 @@
   import IenageFooter from '@/components/Footer.vue'
 
 export default {
-  name: 'App',
+  name: 'CountUp',
   components: {
     DartBoard,
     ScoreBoard,
