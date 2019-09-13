@@ -39,6 +39,9 @@
             />
           </v-col>
           <v-col cols="12" md="6">
+            <magnification-board
+            :magnification="magnification"
+            />
             <score-board
               :history="history"
               :over="over"
@@ -53,12 +56,14 @@
 <script>
 import DartBoard from '@/components/DartBoardForShootOut.vue'
 import ScoreBoard from '@/components/ScoreBoard.vue'
+import MagnificationBoard from '@/components/MagnificationBoard.vue'
 
 export default {
   name: 'ShootOut',
   components: {
     DartBoard,
     ScoreBoard,
+    MagnificationBoard,
   },
   data: () => ({
     dialogRule: false,
