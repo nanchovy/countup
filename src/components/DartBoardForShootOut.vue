@@ -187,10 +187,10 @@ export default {
     },
     isValidArea (number) {
       if (this.validAreaHitHistory.findIndex(area => area === number) === -1) {
-        console.log("true")
+        // console.log("true")
         return true
       } else {
-        console.log("false")
+        // console.log("false")
         return false
       }
     },

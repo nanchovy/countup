@@ -43,6 +43,7 @@
             :magnification="magnification"
             />
             <score-board
+              @deleteLastHistory="deleteLastHistory"
               :history="history"
               :over="over"
             />
@@ -83,28 +84,35 @@ export default {
         // 点数を追加
         // 倍率を更新
         // VAHHにエリアを追加
-        this.history.push({ score: number*times*this.magnification })
+        this.history.push({
+          number: number,
+          times: times,
+          score: number*times*this.magnification,
+        })
         this.magnification++
         this.validAreaHitHistory.push(number)
       } else {
         // 向こうエリアにhitした場合、
         // 0点を追加
         // VAHHに0を追加
-        this.history.push({ score: 0 })
+        this.history.push({
+          number: number,
+          times: 0,
+          score: 0,
+        })
         this.validAreaHitHistory.push(0)
       }
-      // this.history.push({ score: number*times*magnification })
       this.history[this.history.length-1]["order"] = this.history.length
       this.isOver()
     },
     isValidArea (number) {
       if (this.validAreaHitHistory.findIndex(area => area === number) === -1) {
         // 数字がすでに存在=>area無効
-        console.log("true")
+        // console.log("true")
         return true
       } else {
         // 数字が存在していない=>area有効
-        console.log("false")
+        // console.log("false")
         return false
       }
     },
@@ -128,6 +136,16 @@ export default {
     resetHistory () {
       this.history = []
       this.over = false
+    },
+    deleteLastHistory () {
+      if (this.history.length <= 0) return
+      var lastHistory = this.history.pop()
+      if (lastHistory["times"] !== 0) {
+        this.validAreaHitHistory = this.validAreaHitHistory.filter(n => n !== lastHistory["number"])
+        this.magnification--
+      } else {
+        this.validAreaHitHistory.pop()
+      }
     }
   },
   watch: {
