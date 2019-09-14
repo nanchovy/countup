@@ -56,7 +56,7 @@
 
 <script>
 import DartBoard from '@/components/DartBoardForShootOut.vue'
-import ScoreBoard from '@/components/ScoreBoard.vue'
+import ScoreBoard from '@/components/ScoreBoardForShootOut.vue'
 import MagnificationBoard from '@/components/MagnificationBoard.vue'
 
 export default {
@@ -87,6 +87,7 @@ export default {
         this.history.push({
           number: number,
           times: times,
+          magnification: this.magnification,
           score: number*times*this.magnification,
         })
         this.magnification++
@@ -98,6 +99,7 @@ export default {
         this.history.push({
           number: number,
           times: 0,
+          magnification: this.magnification,
           score: 0,
         })
         this.validAreaHitHistory.push(0)
